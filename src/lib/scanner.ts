@@ -11,9 +11,9 @@ export class Scanner {
 
     private scannerError: ScannerError;
 
-    private start: number = 0;
+    private start = 0;
     private next: number = this.start;
-    private lineNumber: number = 1;
+    private lineNumber = 1;
 
     constructor(source: string) {
 	this.source = source;
@@ -41,12 +41,15 @@ export class Scanner {
 		case "=":
 		    this.addTokenNullLiteral((this.match("=")
 			? TokenType.EQUAL_EQUAL : TokenType.EQUAL));
+		    break;
 		case ">":
 		    this.addTokenNullLiteral((this.match("=")
 			? TokenType.GREATER_EQUAL : TokenType.GREATER));
+		    break;
 		case "<":	
 		    this.addTokenNullLiteral((this.match("=")
 			? TokenType.LESS_EQUAL : TokenType.LESS));
+		    break;
 		case "/":
 		    if (this.match("/")) {
 			while(this.peek() != "\n" && !this.isAtEnd()) {this.advance()};
@@ -77,8 +80,9 @@ export class Scanner {
 		    //identifer
 		    } else if (this.isAlpha(c)) {
 			this.tokenizeIdentifier();
+		    } else {
+			this.scannerError.error(this.lineNumber, `Unexpected Character: ${c}`);
 		    }
-		    this.scannerError.error(this.lineNumber, "Unexpected Character");
 		    break;
 	    }
 	    this.start = this.next;

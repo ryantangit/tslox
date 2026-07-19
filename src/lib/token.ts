@@ -79,7 +79,7 @@ export const LITERAL_KEYWORDS: Record<string, TokenType> = {
 export class Token {
     type: TokenType;
     lexeme: string;
-    literal: any;
+    literal: Literal;
     line: number;
 
     constructor(type: TokenType, 
@@ -93,6 +93,6 @@ export class Token {
     }
 
     toString(): string {
-	return `${this.type} ${this.lexeme} ${this.literal}`
+	return `${this.type} ${this.lexeme} ${this.literal ? this.literal.toString(): ""}`;
     }
 }

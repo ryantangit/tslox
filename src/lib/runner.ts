@@ -18,6 +18,7 @@ export class LoxRunner {
 	const contents = readFileSync(filename, {encoding:'utf-8'});
 	this.run(contents);
     };
+    
 
     runPrompt() {
 	const rl = readline.createInterface(
@@ -47,7 +48,7 @@ export class LoxRunner {
     private run(line: string) {
 	const scanner = new Scanner(line);
 	const tokens = scanner.scanTokens();
-	tokens.forEach((token)=> console.log(token));
+	tokens.forEach((token)=> {console.log(token)});
     }
     
 }

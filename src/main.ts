@@ -12,7 +12,6 @@ const options = {
 } satisfies ParseArgsOptionsConfig;
 
 const { values } = parseArgs({options});
-
 if (values.file == null) {
     runner.runPrompt();
 } else {
