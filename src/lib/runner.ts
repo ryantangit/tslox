@@ -1,7 +1,7 @@
 import * as readline from "node:readline/promises";
 import { readFileSync } from "node:fs";
 import { stdin, stdout } from "node:process";
-
+import { Scanner } from "./scanner.js"
 
 /** 
  * The main entry should have two entrances
@@ -9,7 +9,7 @@ import { stdin, stdout } from "node:process";
  * 2.	The second entrance is a file reader, where the entire file is read and executed.
  */
 export class LoxRunner {
-
+    
     /** 
      * Read the file and then execute on the content
      *
@@ -45,7 +45,10 @@ export class LoxRunner {
      * @param line string of lox code
      */
     private run(line: string) {
-	console.log(`< ${line}`);
+	const scanner = new Scanner(line);
+	const tokens = scanner.scanTokens();
+	tokens.forEach((token)=> console.log(token));
     }
+    
 }
 
