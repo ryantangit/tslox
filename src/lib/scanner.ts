@@ -8,12 +8,11 @@ import { TokenType, Token, Literal, LITERAL_KEYWORDS } from "./token.js";
 export class Scanner {
   source: string;
   tokens: Token[] = [];
+  start = 0;
+  next: number = this.start;
+  lineNumber = 1;
 
-  private scannerError: ScannerError;
-
-  private start = 0;
-  private next: number = this.start;
-  private lineNumber = 1;
+  scannerError: ScannerError;
 
   constructor(source: string) {
     this.source = source;
