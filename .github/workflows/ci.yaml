@@ -8,7 +8,7 @@ jobs:
     
     steps:
       - run: echo "Starting CI Job, triggered by a $ {{ github.event_name }} event."
-      - run: echo "branch: $ {{ github.ref }}" 
+      - run: echo "branch: $ {{ github.ref }} " 
       - name: Checking out repository code
         uses: actions/checkout@v7
 
@@ -17,5 +17,12 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
+          
+      - name: Installing dependencies
       - run: npm ci
+
+      - name: Running Lint
+      - run: npm lint
+
+      - name: Running tests
       - run: npm test
