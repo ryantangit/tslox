@@ -8,10 +8,9 @@ jobs:
     
     steps:
       - run: echo "Starting CI Job, triggered by a $ {{ github.event_name }} event."
-      - run: echo "branch: $ {{ github.ref }} " 
+      - run: echo "branch $ {{ github.ref }} " 
       - name: Checking out repository code
         uses: actions/checkout@v7
-
       - name: Setting up Node 
         uses: actions/setup-node@v7
         with:
