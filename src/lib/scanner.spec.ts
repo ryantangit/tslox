@@ -2,7 +2,6 @@ import { TokenType } from "./token.js";
 import { Scanner } from "./scanner.js";
 import { expect, describe, it } from "vitest";
 
-
 describe("Scanner Positional Tests", () => {
   it("should return an EOF token", () => {
     const scanner = new Scanner("");
@@ -48,10 +47,10 @@ describe("Scanner Tokenization Checks", () => {
     expect(tokens.map((token) => token.type)).toEqual([
       TokenType.IDENTIFIER,
       TokenType.IDENTIFIER,
-      TokenType.EOF
+      TokenType.EOF,
     ]);
     expect(scanner.lineNumber == LINE_NUMBER);
-  })
+  });
 
   it("should tokenize a blend of tokens #1", () => {
     //this test string is me vommiting on the keyboard
@@ -105,4 +104,3 @@ describe("Scanner Tokenization Checks", () => {
     ]);
   });
 });
-

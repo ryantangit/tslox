@@ -11,8 +11,7 @@ export class Scanner {
   start = 0;
   next: number = this.start;
   lineNumber = 1;
-  multiLineCommentDepth = 0
-  
+  multiLineCommentDepth = 0;
 
   scannerError: ScannerError;
 
@@ -53,12 +52,12 @@ export class Scanner {
           this.addTokenNullLiteral(TokenType.SEMICOLON);
           break;
         case "*":
-	  if (this.multiLineCommentDepth > 0 && this.peek() == "/") {
-	    this.multiLineCommentDepth -= 1;
-	    this.advance();
-	  } else {
-	    this.addTokenNullLiteral(TokenType.STAR);
-	  }
+          if (this.multiLineCommentDepth > 0 && this.peek() == "/") {
+            this.multiLineCommentDepth -= 1;
+            this.advance();
+          } else {
+            this.addTokenNullLiteral(TokenType.STAR);
+          }
           break;
         case "!":
           this.addTokenNullLiteral(
@@ -86,10 +85,10 @@ export class Scanner {
               this.advance();
             }
           } else if (this.peek() == "*") {
-	    this.multiLineCommentDepth += 1;
-	    console.log(this.multiLineCommentDepth);
-	    this.advance();
-	  } else {
+            this.multiLineCommentDepth += 1;
+            console.log(this.multiLineCommentDepth);
+            this.advance();
+          } else {
             this.addTokenNullLiteral(TokenType.SLASH);
           }
           break;
