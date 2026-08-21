@@ -18,10 +18,10 @@ jobs:
           package-manager-cache: false
           
       - name: Installing dependencies
-      - run: npm ci
+        run: npm ci
 
       - name: Running Lint
-      - run: npm lint
+        run: npm lint
 
       - name: Running tests
-      - run: npm test
+        run: npm test
