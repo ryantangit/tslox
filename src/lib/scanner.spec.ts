@@ -2,14 +2,7 @@ import { TokenType } from "./token.js";
 import { Scanner } from "./scanner.js";
 import { expect, describe, it } from "vitest";
 
-//Starting point for tests, ofc add more if errors pop-up, feature gets added, etc
-//1. Correct termination logic
-//	a. assumption of next/start/end are all correct
-//	b. when done we finish with a EOF token
-//2. Individual cases for tokenTypes
-//3. Tokenization of string, int and literals
-//4. Comments
-//5. TODO: Multi-line comments
+
 describe("Scanner Positional Tests", () => {
   it("should return an EOF token", () => {
     const scanner = new Scanner("");
@@ -35,6 +28,30 @@ describe("Scanner Tokenization Checks", () => {
     const tokens = scanner.scanTokens();
     expect(tokens.at(0)?.type).toBe(TokenType.EOF);
   });
+
+  it("should ignore multiline comments", () => {
+    const LINE_NUMBER = 6;
+    const testString = `
+    /*
+      /* *hellothere //Hellothisisnothing again
+	/*
+	  * nested
+	*/
+      wowowowowoow
+      */
+    */
+    there
+    world
+    `;
+    const scanner = new Scanner(testString);
+    const tokens = scanner.scanTokens();
+    expect(tokens.map((token) => token.type)).toEqual([
+      TokenType.IDENTIFIER,
+      TokenType.IDENTIFIER,
+      TokenType.EOF
+    ]);
+    expect(scanner.lineNumber == LINE_NUMBER);
+  })
 
   it("should tokenize a blend of tokens #1", () => {
     //this test string is me vommiting on the keyboard
@@ -88,3 +105,4 @@ describe("Scanner Tokenization Checks", () => {
     ]);
   });
 });
+
