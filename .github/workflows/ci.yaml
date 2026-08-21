@@ -1,0 +1,27 @@
+name: CI
+run-name: See Eye
+on: [push]
+
+jobs:
+  Run-SeeEye:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - run: echo "Starting CI Job, triggered by a $ {{ github.event_name }} event."
+      - run: echo "branch $ {{ github.ref }} " 
+      - name: Checking out repository code
+        uses: actions/checkout@v7
+      - name: Setting up Node 
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+          
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: Running Lint
+        run: npm run lint
+
+      - name: Running tests
+        run: npm test
